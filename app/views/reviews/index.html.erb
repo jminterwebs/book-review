@@ -1,0 +1,43 @@
+<table>
+<thead>
+<tr>
+  <th>Title</th>
+  <th>Author</th>
+  <th>Publication Date</th>
+  <th>ISBN</th>
+  <th>Average Rating</th>
+  <th>Reviews</th>
+</tr>
+</thead>
+<tbody>
+<% @reviews.each do |review| %>
+  <tr>
+    <td><%= review.book.title %></td>
+    <td><%= review.book.author %></td>
+    <td><%= review.book.publication_year %> </td>
+    <td><%= review.book.isbn %></td>
+
+    <!-- Calculate average rating, if any reviews exist -->
+    <td>
+      <% if review.book.reviews.any? %>
+        <%= review.book.reviews.average(:rating).round(2) %> <!-- Adjust as necessary for rounding -->
+      <% else %>
+        No ratings yet
+      <% end %>
+    </td>
+
+    <!-- Link to the reviews page for each book -->
+    <td>
+      <%= link_to 'Details', book_path(review.book) %>
+    </td>
+    <td>
+      <%= link_to 'Edit Review',  edit_user_review_path(current_user.id, review.id) %>
+    </td>
+
+    <td>
+      <%= button_to 'Delete Review', user_review_path(current_user.id, review.id), method: :delete %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>

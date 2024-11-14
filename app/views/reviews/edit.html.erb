@@ -1,0 +1,32 @@
+<h2> Edit Form</h2>
+
+<h1>Edit Review for <%= @user.name %></h1>
+
+<%= form_with(model: @review ) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, rows: 5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating, min: 1, max: 5 %>
+  </div>
+
+  <% if @review.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit "Update Review" %>
+  </div>
+<% end %>
+
+<%#= link_to 'Back to Reviews', user_reviews_path(@user) %>
