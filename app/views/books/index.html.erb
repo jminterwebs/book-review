@@ -1,8 +1,9 @@
 
 <h1>Books with Reviews</h1>
 
-
-<%= link_to "Add Book with review", new_book_path %>
+<% if current_user %>
+  <%= link_to "Add Book with review", new_book_path %>
+<% end %>
 <table>
   <thead>
   <tr>
@@ -38,5 +39,8 @@
     </tr>
   <% end %>
   </tbody>
+
+
 </table>
-88260762132629
+
+<%= paginate @books %>

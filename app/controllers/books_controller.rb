@@ -3,13 +3,13 @@ class BooksController < ApplicationController
 
 
   def index
-    @books = Book.all
 
+    @books = Book.page(params[:page]).per(15)
   end
 
   def show
     @book = Book.find(params[:id])
-    @reviews = @book.reviews
+    @review = @book.reviews.build  # This initializes an empty Review object
   end
 
   def new
