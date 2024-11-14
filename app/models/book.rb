@@ -1,9 +1,9 @@
 class Book < ApplicationRecord
 
-  validates :title, presence: true
-  validates :author, presence: true
+  validates :title, presence: true, uniqueness: true
+  validates :author, presence: true, uniqueness: true
   validates :publication_year, presence: true
-  validates :isbn, presence: true
+  validates :isbn, presence: true, uniqueness: true
   validate :isbn_format
 
 
