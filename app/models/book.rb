@@ -17,6 +17,7 @@ class Book < ApplicationRecord
   end
 
   def valid_isbn?(isbn)
+    return false if isbn.nil? || isbn.empty?
     # Check for ISBN-10 and ISBN-13
     isbn_regex = /^(?:\d{9}[\dX]|\d{13})$/
     return false unless isbn.match?(isbn_regex)
