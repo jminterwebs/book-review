@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+/* app/assets/stylesheets/application.css */
+.error_message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.2em;
+}
