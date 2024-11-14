@@ -26,10 +26,25 @@ def generate_valid_isbn
   digits.join.to_s
 end
 
+
+
 if Rails.env.development?
+
+
+
+
   25.times do |i|
-    book = Book.new(title: Faker::Book.title, author: Faker::Book.author, publication_year: 2025 - i, isbn: generate_valid_isbn )
-    puts book.save!
+    user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)
+    Book.create(title: Faker::Book.title, author: Faker::Book.author, publication_year: 2025 - i, isbn: generate_valid_isbn,
+                       reviews_attributes: [
+                         {
+                           user_id: user.id,
+                           content: Faker::Lorem.paragraph(sentence_count: 4),
+                           rating: rand(1..5)
+                         }
+                        ]
+                       )
+
   end
 end
 
