@@ -4,6 +4,14 @@
 <% if current_user %>
   <%= link_to "Add Book with review", new_book_path %>
 <% end %>
+
+<%= form_with(url: books_path, method: :get, local: false, data: { turbo_action: 'replace' }) do %>
+  <%= label_tag :search, 'Search by Title or Author' %>
+  <%= text_field_tag :search, params[:search], placeholder: "Enter title or author", class: 'search-input' %>
+  <%= submit_tag 'Search', class: 'search-button' %>
+<% end %>
+
+
 <table>
   <thead>
   <tr>

@@ -3,8 +3,18 @@ class BooksController < ApplicationController
 
 
   def index
+    def index
+      @books = if params[:search].present?
+                 Book.where('UPPER(title) LIKE ? OR UPPER(author) LIKE ?', "%#{params[:search].upcase}%", "%#{params[:search].upcase}%").page(params[:page]).per(15)
+               else
+                 Book.page(params[:page]).per(15)
+               end
 
-    @books = Book.page(params[:page]).per(15)
+      respond_to do |format|
+        format.html # standard HTML response (renders full page)
+        format.turbo_stream # Turbo response (renders only the books list)
+      end
+    end
   end
 
   def show
