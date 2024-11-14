@@ -28,7 +28,6 @@ class ReviewsController < ApplicationController
     @user = current_user
   end
   def update
-    binding.pry
     @review = Review.find(params[:id])
     if @review.update(review_params)
       redirect_to user_reviews_path(@user), notice: 'Review was successfully updated.'
