@@ -28,7 +28,7 @@ end
 
 if Rails.env.development?
   25.times do |i|
-    book = Book.new(title: Faker::Book.title, author: Faker::Book.author, publication_year: i - 2025, isbn: generate_valid_isbn )
+    book = Book.new(title: Faker::Book.title, author: Faker::Book.author, publication_year: 2025 - i, isbn: generate_valid_isbn )
     puts book.save!
   end
 end
