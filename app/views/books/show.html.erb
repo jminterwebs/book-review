@@ -16,21 +16,27 @@
   <% end %>
 </p>
 
-<!-- Link to reviews form -->
-<%#= link_to 'Add a Review', new_book_review_path(@book) %>
 
-<h2>Reviews</h2>
+<% if current_user %>
+<div id="new_review_form">
+  <%= form_with(model: [ @book, @review ], local: true) do |form| %>
 
-<!-- Display the reviews for the book -->
-<% if @reviews.any? %>
-  <ul>
-    <% @reviews.each do |review| %>
-      <li>
-        <strong><%= review.user.name %></strong> (Rating: <%= review.rating %>/5)<br>
-        <%= review.content %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No reviews yet.</p>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    </div>
+    <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating, min: 1, max: 5 %>
+    </div>
+    <%= form.submit "Submit Review", class: "btn btn-primary" %>
+  <% end %>
+</div>
 <% end %>
+
+
+<h2>Reviews:</h2>
+<div id="reviews">
+  <%= render @book.reviews %>
+</div>
