@@ -1,0 +1,36 @@
+<!-- app/views/books/show.html.erb -->
+<h1>Book Details: <%= @book.title %></h1>
+
+<!-- Display book details -->
+<p><strong>Author:</strong> <%= @book.author %></p>
+<p><strong>Publication Year:</strong> <%= @book.publication_year %></p>
+<p><strong>ISBN:</strong> <%= @book.isbn %></p>
+
+<!-- Display the average rating of the book -->
+<p>
+  <strong>Average Rating:</strong>
+  <% if @book.reviews.any? %>
+    <%= @book.reviews.average(:rating).round(2) %>
+  <% else %>
+    No ratings yet
+  <% end %>
+</p>
+
+<!-- Link to reviews form -->
+<%#= link_to 'Add a Review', new_book_review_path(@book) %>
+
+<h2>Reviews</h2>
+
+<!-- Display the reviews for the book -->
+<% if @reviews.any? %>
+  <ul>
+    <% @reviews.each do |review| %>
+      <li>
+        <strong><%= review.user.name %></strong> (Rating: <%= review.rating %>/5)<br>
+        <%= review.content %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No reviews yet.</p>
+<% end %>
