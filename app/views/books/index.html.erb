@@ -1,6 +1,8 @@
 
 <h1>Books with Reviews</h1>
 
+
+<%= link_to "Add Book with review", new_book_path %>
 <table>
   <thead>
   <tr>
@@ -31,9 +33,10 @@
 
       <!-- Link to the reviews page for each book -->
       <td>
-        <%#= link_to 'View Reviews', book_reviews_path(book) %>
+        <%= link_to 'Details', book_path(book) %>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+88260762132629
