@@ -21,7 +21,7 @@
 
   <div>
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, required: true %>
     <% if @book.errors[:title].any? %>
       <div class="error_message">
         <%= @book.errors[:title].join(", ") %>
@@ -31,7 +31,7 @@
 
   <div>
     <%= form.label :author %>
-    <%= form.text_field :author %>
+    <%= form.text_field :author, required: true %>
     <% if @book.errors[:author].any? %>
       <div class="error_message">
         <%= @book.errors[:author].join(", ") %>
@@ -41,7 +41,7 @@
 
   <div>
     <%= form.label :publication_year, "Publication Year" %>
-    <%= form.number_field :publication_year, min: 1000, max: Date.today.year, step: 1 %>
+    <%= form.number_field :publication_year, min: 1000, max: Date.today.year, step: 1, required: true %>
     <% if @book.errors[:publication_year].any? %>
       <div class="error_message">
         <%= @book.errors[:publication_date].join(", ") %>
@@ -51,7 +51,7 @@
 
   <div>
     <%= form.label :isbn %>
-    <%= form.text_field :isbn %>
+    <%= form.text_field :isbn, required: true %>
     <% if @book.errors[:isbn].any? %>
       <div class="error_message">
         <%= @book.errors[:isbn].join(", ") %>
