@@ -1,0 +1,39 @@
+
+<h1>Books with Reviews</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Publication Date</th>
+    <th>ISBN</th>
+    <th>Average Rating</th>
+    <th>Reviews</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.publication_year %> </td>
+      <td><%= book.isbn %></td>
+
+      <!-- Calculate average rating, if any reviews exist -->
+      <td>
+        <% if book.reviews.any? %>
+          <%= book.reviews.average(:rating).round(2) %> <!-- Adjust as necessary for rounding -->
+        <% else %>
+          No ratings yet
+        <% end %>
+      </td>
+
+      <!-- Link to the reviews page for each book -->
+      <td>
+        <%#= link_to 'View Reviews', book_reviews_path(book) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

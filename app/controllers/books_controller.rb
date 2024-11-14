@@ -1,11 +1,10 @@
 class BooksController < ApplicationController
-  has_many :reviews
-
   before_action :authenticate_user!, except: [:index, :show]
 
 
   def index
     @books = Book.all
+
   end
 
   def show
