@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Best experience is if you have asdf set up for version control [asdf](https://asdf-vm.com/), for ruby and node version control
 
-Things you may want to cover:
+To run 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`rails db:create`
+`rails db:migrate`
+`rails db:seed`
+`rails webpacker:install`
+`rails s`
