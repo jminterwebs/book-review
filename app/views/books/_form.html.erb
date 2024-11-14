@@ -1,0 +1,91 @@
+
+
+<% if flash[:error] %>
+  <div class="flash_error">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+
+<%= form_with model: @book do |form| %>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+    <% if @book.errors[:title].any? %>
+      <div class="error_message">
+        <%= @book.errors[:title].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+    <% if @book.errors[:author].any? %>
+      <div class="error_message">
+        <%= @book.errors[:author].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :publication_year, "Publication Year" %>
+    <%= form.number_field :publication_year, min: 1000, max: Date.today.year, step: 1 %>
+    <% if @book.errors[:publication_year].any? %>
+      <div class="error_message">
+        <%= @book.errors[:publication_date].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :isbn %>
+    <%= form.text_field :isbn %>
+    <% if @book.errors[:isbn].any? %>
+      <div class="error_message">
+        <%= @book.errors[:isbn].join(", ") %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Nested Review Form -->
+  <h3>Review</h3>
+  <%= form.fields_for :reviews do |review_form| %>
+    <%= review_form.hidden_field :user_id, value: current_user.id %>
+
+    <div>
+      <%= review_form.label :rating %>
+      <%= review_form.number_field :rating, min: 1, max: 5 %>
+      <% if review_form.object.errors[:rating].any? %>
+        <div class="error_message">
+          <%= review_form.object.errors[:rating].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= review_form.label :content %>
+      <%= review_form.text_area :content %>
+      <% if review_form.object.errors[:content].any? %>
+        <div class="error_message">
+          <%= review_form.object.errors[:content].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit (@book.new_record? ? "Add Book and Review" : "Update Book and Review") %>
+  </div>
+<% end %>
