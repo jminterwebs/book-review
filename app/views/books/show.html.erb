@@ -17,7 +17,7 @@
 </p>
 
 
-<% if current_user %>
+<% if current_user &&  @book.reviews.where(user_id: current_user.id).empty? %>
 <div id="new_review_form">
   <%= form_with(model: [ @book, @review ], local: true) do |form| %>
 
